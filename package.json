@@ -1,8 +1,11 @@
 {
     "name": "list-image-gen",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "List image generated based on JIMP",
     "main": "index.js",
+    "files": [
+        "index.js"
+    ],
     "dependencies": {
         "jimp": "^0.16.1"
     },
