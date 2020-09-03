@@ -10,7 +10,7 @@ class List {
     constructor(config) {
         const { lines, fontPath, outputFolder, first, extra } = config;
 
-        this.lines = lines.filter(i => i);
+        this.lines = lines.filter(i => i !== null);
         this.font = fontPath || Jimp.FONT_SANS_32_BLACK;
         this.outputFolder = outputFolder;
 
@@ -68,16 +68,11 @@ class List {
 
                 let line = this.lines.shift();
 
-                let text = `${this.num++}.    ${line} ${iter}`.replace(
-                    /[^A-Za-z0-9. \"\!\`\?\'\.\,\;\:\(\)\[\]\{\}\<\>\|\/\@\\\^\$\-\%\+\=\#\_\&\~\*]+/g,
-                    ''
-                );
-
                 image.print(
                     this.font,
                     ctx.offset.x + ctx.interval.x * iter,
                     ctx.offset.y + ctx.interval.y * iter,
-                    text
+                    line
                 );
 
                 iter++;
