@@ -1,2 +1,3 @@
-# list-image-gen
-List image generated based on JIMP
+# list-image-generator
+
+List (image) generator based on JIMP
