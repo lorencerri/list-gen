@@ -8,11 +8,11 @@ const Jimp = require('jimp');
 
 class List {
     constructor(config) {
-        const { lines, fontPath, outputFolder, first, extra } = config;
+        const { lines, fontPath, first, extra } = config;
 
         this.lines = lines.filter(i => i !== null);
         this.font = fontPath || Jimp.FONT_SANS_32_BLACK;
-        this.outputFolder = outputFolder;
+        this.buffers = [];
 
         this.first = {
             offset: {
@@ -51,9 +51,12 @@ class List {
                 );
 
                 let state = this.extra;
-                await this.next_page();
+                let buffer = await this.next_page();
+                this.buffers.push(buffer);
                 this.extra = state;
             }
+
+            resolve(this.buffers);
         });
     }
 
@@ -78,15 +81,9 @@ class List {
                 iter++;
             }
 
-            image.write(
-                `${this.outputFolder}${
-                    this.outputFolder[this.outputFolder.length - 1] === '/'
-                        ? ''
-                        : '/'
-                }${this.page++}.jpg`
-            );
+            let buffer = await image.getBufferAsync(Jimp.MIME_PNG);
 
-            resolve(true);
+            resolve(buffer);
         });
     }
 }

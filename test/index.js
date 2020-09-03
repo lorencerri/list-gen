@@ -43,5 +43,8 @@ const config = {
     }
 };
 
-const list = new List(config);
-list.generate();
+(async () => {
+    const list = new List(config);
+    let buffers = await list.generate();
+    console.log(buffers);
+})();
