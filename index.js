@@ -46,7 +46,9 @@ class List {
                 throw new Error('No background path specified');
 
             while (this.lines.length > 0) {
-                console.log(`${this.lines.length} lines remaining`);
+                console.log(
+                    `Generating page ${this.page}, ${this.lines.length} lines remaining`
+                );
 
                 let state = this.extra;
                 await this.next_page();

@@ -1,4 +1,4 @@
-const List = require('./main.js');
+const List = require('../index.js');
 
 let lines = [
     'zombocom',
@@ -167,10 +167,10 @@ let lines = [
 
 const config = {
     lines,
-    fontPath: './resources/hypnoverse.fnt',
-    outputFolder: './output/',
+    fontPath: __dirname + '/resources/hypnoverse.fnt',
+    outputFolder: __dirname + '/output/',
     first: {
-        background: './resources/first.png',
+        background: __dirname + '/resources/first.png',
         maxLines: 41,
         offset: {
             x: 60,
@@ -182,7 +182,7 @@ const config = {
         }
     },
     extra: {
-        background: './resources/extra.png',
+        background: __dirname + '/resources/extra.png',
         maxLines: 48,
         offset: {
             x: 60,
