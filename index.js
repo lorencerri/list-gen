@@ -60,7 +60,7 @@ class List {
     async next_page() {
         return new Promise(async (resolve, reject) => {
             const ctx = this[this.page === 1 ? 'first' : 'extra'];
-            const image = await Jimp.read(ctx.background); // TODO: Don't reload when the new image has the same path
+            const image = await Jimp.read(ctx.background);
 
             let iter = 1;
             while (this.lines.length > 0 && iter <= ctx.maxLines) {
