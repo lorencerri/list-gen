@@ -16,7 +16,6 @@ lines = lines.map(item => {
 const config = {
     lines,
     fontPath: __dirname + '/resources/hypnoverse.fnt',
-    outputFolder: __dirname + '/output/',
     first: {
         background: __dirname + '/resources/first.png',
         maxLines: 41,
@@ -46,5 +45,5 @@ const config = {
 (async () => {
     const list = new List(config);
     let buffers = await list.generate();
-    console.log(buffers);
+    console.log(buffers.length);
 })();

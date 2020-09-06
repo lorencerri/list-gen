@@ -11,7 +11,8 @@ class List {
         const { lines, fontPath, first, extra } = config;
 
         this.lines = lines.filter(i => i !== null);
-        this.font = fontPath || Jimp.FONT_SANS_32_BLACK;
+        this.fontPath = fontPath || Jimp.FONT_SANS_32_BLACK;
+        this.font = null;
         this.buffers = [];
 
         this.first = {
@@ -39,7 +40,7 @@ class List {
 
     generate() {
         return new Promise(async (resolve, reject) => {
-            this.font = await Jimp.loadFont(this.font);
+            this.font = await Jimp.loadFont(this.fontPath);
             if (!this.font) throw new Error('Unable to load font.');
 
             if (!this.first.background)
@@ -81,8 +82,8 @@ class List {
                 iter++;
             }
 
+            this.page++;
             let buffer = await image.getBufferAsync(Jimp.MIME_PNG);
-
             resolve(buffer);
         });
     }
