@@ -14,7 +14,7 @@ test('lines parameter empty', t => {
 	t.fail();
 });
 
-// Output: ../output/todolist/#-image.jpg
+// Output: ./output/todolist/#-image.jpg
 test('generate with todo list theme', async t => {
 	const list = new List(
 		[...new Array(22)].map((_, i) => `Item #${i}`),
@@ -32,7 +32,7 @@ test('generate with todo list theme', async t => {
 	t.true(results.every(i => Buffer.isBuffer(i)));
 });
 
-// Output: ../output/hypnospace/#-image.jpg
+// Output: ./output/hypnospace/#-image.jpg
 test('generate with hypnospace theme', async t => {
 	const list = new List(
 		[...new Array(200)].map((_, i) => `Item #${i}`),
