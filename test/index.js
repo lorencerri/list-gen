@@ -1,49 +1,62 @@
-const List = require('../index.js');
+const test = require('ava');
+const path = require('path');
+const List = require('..');
+const Jimp = require('jimp');
 
-// prettier-ignore
-let lines = ['<-----  Official  Channels  ----->', 'zombocom','the-oracle','simonikers-chill-zone','not-tonight-fanpage','rosies-hideout','supa-hot-fire','ðŸ˜Žmikes-cool-pageðŸ˜Ž','', '', '<------  Community Channels  ------>', 'activys-amazing-facts-ðŸŒ','hypno-guide','hot-dads-hot-planet-world','gate-to-heaven','trigger-words-wiki','the-most-amazing-website-on-the-internet','later-the-greater','dog-pics','hypno-how','ðŸ•µfsociologyðŸ•µ','destroy-hypnowaste-today','fishi','homepage-of-the-moon','smoocha-lucha-yo','spanish-penguin-club','tiny-gardenðŸŒ¼','aÌ´Ì“ÍlÌµÍ‹ÍwÌ·Ì‹ÌaÌµÌ¿Ì€yÌ´ÌšÌsÌµÍ†Ì-Ì·ÍÌwÌ´Í‚ÌŽaÌ¸ÌƒÍŠtÌµÍ†Ì‡cÌ¶ÌˆÌ‘hÌ¶Í€ÌiÌµÍÌˆnÌ¸ÍÌ½gÌ¶Í‘Ìƒ','dedmall','old-church-pub','descenders-fan-club','twaunlounge','ultima-online-rares','tricky-leaks','mikes-bargain-basement','screensaver-simulator','ðŸ¥”potatoðŸ¥”zoneðŸ¥”','the-cool-corner','kobolds-dojo','mabelðŸŒshrine','mythicalbeasts','_-xxx-ultimate-pogs-xxx-_','black-hat-industries','best-of-the-internet','ðŸŒŒðŸ—£h3adsp8ceðŸ‘¥ðŸŒŒ','poetry-zone','90s-internet-chat','cube-earthers-society','h','spartans-cyberdiver-collection','garlicbread','hmm','dw4ynextasis-1337cybershack','â­-the-â™-s-den-â­','ðŸ“ƒ-â€¢-team-scroll','pixelboomers','interviews-and-songs','jeeks-basement-funtime-show','lammys-games','ðŸ•¯-are-you-with-us-ðŸ•¯','fsociology-challenge-talk','free-hypnos-wallpapers','high-quality-rips','gross','poland-stronk','the-autistic-trio','sniping-the-69th-entry','guinea-pigs-fanclub','cat-pics','shaved-bees-95','insane-ramblings','kmod',null,'xx_s3m1c1rcl3_xxs-c00l-web-site','leafguy1999s-cool-website','cult-of-rghaul','ðŸ‡²ike-is-the-lie','interesting-indie-games','the-underdark-hangout','loi','pizza-verification','the-y2k-information-centre','mathsucksorghelpkids','experiment-342','hypnocrates-public','totally-not-crate-farming','to-the-great-milton-erickson','hello-world','campspace','borkin-good-dogs','squaresite','freemoney','the-weeping-domain','zettabot','dank-memes','im-not-a-bad-guy','moles','kittykat-dance','somnatube_100','squisherzostfreedownloadnovirus','ðŸ«-jakes-place-ðŸ«','the-outside-job','ðŸ¦amoe-baesðŸ¦','the-pizza-zone','the-danger-zone','youâ€™ve-got-mail','fight-the-power','the-screaming-zone','standers-hub','hsdpp-idk','fundmego',null,'aneidorus-page','the-hallway','the-kitchen','the-stairway','the-basement','the-ladder','the-attic','and-it-has-started','the-room','sandy-hill-weather','finding-zapper-maths-2','it-be-happen-todey','hypnospace-cheats','do-you-see-the-users-type','ðŸ’°-5khc-for-page-slot-ðŸ’°','space-station-13-goonstation','space-teens','the-perfect-peppermile-pizza','aldens-blog','dial-in-like-its-88','hypnospace-addicts-anonymous','f000147','roborights','lzsoft','badcitizenmcgee','nothing-really-here','squisherz-theme-parodies','sfonline','poems-to-another-world','skeletonz','software-reviews','eye-patch-space','flist','bakuâ€™s-abode','cookie-of-the-week','dylan-merchant-unofficial','merlins-tower','nothing-really','sprite-art-and-game-dev-emporium','h',null,'less-page','epic-hypnospace-page','pizza-heroes-official-webpage','tsukis-page','y-window-system','dankrift','hypnospace-beta-project','ðŸ‡¸-ðŸ‡­-ðŸ‡¦-ðŸ‡¬-ðŸ‡¸','getting-gravy-at-the-store','chatstick','shagsfriends-dms','webpage','hspa'];
+test('lines parameter empty', t => {
+	try {
+		// eslint-disable-next-line no-new
+		new List();
+	} catch (error) {
+		return t.is(error.message, 'Expected lines to be an array');
+	}
 
-let iter = 1;
-lines = lines.map(item => {
-    if (item && !item.startsWith('<'))
-        return `${iter++}.    ${item}`.replace(
-            /[^A-Za-z0-9. \"\!\`\?\'\.\,\;\:\(\)\[\]\{\}\<\>\|\/\@\\\^\$\-\%\+\=\#\_\&\~\*]+/g,
-            ''
-        );
-    else return item;
+	t.fail();
 });
 
-const config = {
-    lines,
-    fontPath: __dirname + '/resources/hypnoverse.fnt',
-    first: {
-        background: __dirname + '/resources/first.png',
-        maxLines: 41,
-        offset: {
-            x: 60,
-            y: 240
-        },
-        interval: {
-            x: 0,
-            y: 40
-        }
-    },
-    extra: {
-        background: __dirname + '/resources/extra.png',
-        maxLines: 48,
-        offset: {
-            x: 60,
-            y: -30
-        },
-        interval: {
-            x: 0,
-            y: 40
-        }
-    }
-};
+// Output: ../output/todolist/#-image.jpg
+test('generate with todo list theme', async t => {
+	const list = new List(
+		[...new Array(22)].map((_, i) => `Item #${i}`),
+		{
+			initialXY: [420, 420],
+			spacing: (x, y) => [x, y + 96.3],
+			firstBG: path.join(__dirname, '/resources/todolist/todolist.jpg'),
+			write: path.join(__dirname, '/output/todolist/'),
+			font: Jimp.FONT_SANS_128_BLACK
+		}
+	);
 
-(async () => {
-    const list = new List(config);
-    let buffers = await list.generate();
-    console.log(buffers.length);
-})();
+	t.true(typeof list === 'object');
+	const results = await list.generate();
+	t.true(results.every(i => Buffer.isBuffer(i)));
+});
+
+// Output: ../output/hypnospace/#-image.jpg
+test('generate with hypnospace theme', async t => {
+	const list = new List(
+		[...new Array(200)].map((_, i) => `Item #${i}`),
+		{
+			initialXY: [
+				[60, 280], // Page 1
+				[60, 10] // Page >= 2
+			],
+			spacing: (x, y, {remainingLines, pageNumber}) => {
+				if (pageNumber === 0) {
+					y += remainingLines.length % 6 === 0 ? 2 : 0; // Every 6 items on the first page, add 2 to the y position
+				}
+
+				return [x, y + 40];
+			},
+			maxLines: [41, 48],
+			write: path.join(__dirname, '/output/hypnospace/'),
+			firstBG: path.join(__dirname, '/resources/hypnospace/first.png'),
+			extraBG: path.join(__dirname, '/resources/hypnospace/extra.png'),
+			font: path.join(__dirname, '/resources/hypnospace/hypnoverse.fnt')
+		}
+	);
+
+	t.true(typeof list === 'object');
+	const results = await list.generate();
+	t.true(results.every(i => Buffer.isBuffer(i)));
+});

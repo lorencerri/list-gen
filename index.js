@@ -1,92 +1,139 @@
-/**
- * List generator based on JIMP
- * @param { string[] } lines - Array of text
- * @param { number } maxLines - Maximum amount of lines per page
- */
-
 const Jimp = require('jimp');
 
+const nestArray = (array = []) => {
+	if (!Array.isArray(array[0])) {
+		array = [array];
+	}
+
+	return array;
+};
+
+const defaultSpacing = (x, y) => [x, y + 40];
+
 class List {
-    constructor(config) {
-        const { lines, fontPath, first, extra } = config;
+	constructor(lines, options = {}) {
+		const {
+			initialXY,
+			spacing,
+			write,
+			maxLines,
+			firstBG,
+			extraBG,
+			font
+		} = options;
 
-        this.lines = lines.filter(i => i !== null);
-        this.fontPath = fontPath || Jimp.FONT_SANS_32_BLACK;
-        this.font = null;
-        this.buffers = [];
+		// Invalid Parameters
 
-        this.first = {
-            offset: {
-                x: first.offset.x || 0,
-                y: first.offset.y || 0
-            },
-            interval: { x: first.interval.x || 0, y: first.interval.y || 50 },
-            background: first.background,
-            maxLines: first.maxLines || 100
-        };
-        this.extra = {
-            offset: {
-                x: extra.offset.x || 0,
-                y: extra.offset.y || 0
-            },
-            interval: { x: extra.interval.x || 0, y: extra.interval.y || 50 },
-            background: extra.background || first.background,
-            maxLines: extra.maxLines || 100
-        };
+		if (!lines) {
+			throw new Error('Expected lines to be an array');
+		}
 
-        this.page = 1;
-        this.num = 1;
-    }
+		if (initialXY && !Array.isArray(initialXY)) {
+			throw new TypeError(
+				'Expected options:initialXY to be undefined or an array'
+			);
+		}
 
-    generate() {
-        return new Promise(async (resolve, reject) => {
-            this.font = await Jimp.loadFont(this.fontPath);
-            if (!this.font) throw new Error('Unable to load font.');
+		if (spacing && typeof spacing !== 'function') {
+			throw new TypeError(
+				'Expected options:spacing to be undefined or a function'
+			);
+		}
 
-            if (!this.first.background)
-                throw new Error('No background path specified');
+		if (write && typeof write !== 'string') {
+			throw new TypeError(
+				'Expected options:write to be undefined or a string'
+			);
+		}
 
-            while (this.lines.length > 0) {
-                console.log(
-                    `Generating page ${this.page}, ${this.lines.length} lines remaining`
-                );
+		if (
+			maxLines &&
+			!Array.isArray(maxLines) &&
+			typeof maxLines !== 'string'
+		) {
+			throw new TypeError(
+				'Expected options:maxLines to be a undefined, string, or array'
+			);
+		}
 
-                let state = this.extra;
-                let buffer = await this.next_page();
-                this.buffers.push(buffer);
-                this.extra = state;
-            }
+		if (typeof firstBG !== 'string') {
+			throw new TypeError('Expected options:firstBG to be a string');
+		}
 
-            resolve(this.buffers);
-        });
-    }
+		if (extraBG && typeof extraBG !== 'string') {
+			throw new TypeError(
+				'Expected options:extraBG to be undefined or a string'
+			);
+		}
 
-    async next_page() {
-        return new Promise(async (resolve, reject) => {
-            const ctx = this[this.page === 1 ? 'first' : 'extra'];
-            const image = await Jimp.read(ctx.background);
+		if (font && typeof font !== 'string') {
+			throw new TypeError(
+				'Expected options:font to be undefined or a string'
+			);
+		}
 
-            let iter = 1;
-            while (this.lines.length > 0 && iter <= ctx.maxLines) {
-                this.first.offset.y += iter % 6 == 0 ? 2 : 0; // Custom
+		this.lines = typeof lines === 'string' ? [lines] : lines;
+		this.initialXY = nestArray(initialXY || [[0, 0]]);
+		this.spacing = spacing || defaultSpacing;
+		this.write = write;
+		this.maxLines = maxLines || [0, 0];
+		this.firstBG = firstBG;
+		this.extraBG = extraBG || firstBG;
+		this.font = font || Jimp.FONT_SANS_32_BLACK;
+	}
 
-                let line = this.lines.shift();
+	async generate() {
+		if (!this.firstBG) {
+			throw new Error('No background path specified');
+		}
 
-                image.print(
-                    this.font,
-                    ctx.offset.x + ctx.interval.x * iter,
-                    ctx.offset.y + ctx.interval.y * iter,
-                    line
-                );
+		this.loadedFont = await Jimp.loadFont(this.font);
+		if (!this.loadedFont) {
+			throw new Error('Unable to load font');
+		}
 
-                iter++;
-            }
+		const remainingLines = [...this.lines];
+		const index = 0;
 
-            this.page++;
-            let buffer = await image.getBufferAsync(Jimp.MIME_PNG);
-            resolve(buffer);
-        });
-    }
+		return this.nextPage(remainingLines, index);
+	}
+
+	async nextPage(remainingLines, index, pages = []) {
+		const bg = await Jimp.read(index === 0 ? this.firstBG : this.extraBG);
+		const pg = index === 0 ? 0 : 1;
+
+		const maxLines = this.maxLines[pg] || this.maxLines[0];
+		let XY = this.initialXY[index > 0 && this.initialXY[1] ? 1 : 0];
+		let indexOnPage = 0;
+
+		while (remainingLines.length > 0) {
+			if (maxLines && indexOnPage >= maxLines) {
+				break;
+			}
+
+			const line = remainingLines.shift();
+			bg.print(this.loadedFont, XY[0], XY[1], line);
+			XY = this.spacing(...XY, {
+				pageNumber: index,
+				remainingLines,
+				indexOnPage
+			});
+
+			indexOnPage++;
+		}
+
+		pages.push(await bg.getBufferAsync(Jimp.MIME_PNG));
+
+		if (this.write) {
+			bg.write(`${this.write}${index}-image.jpg`);
+		}
+
+		if (remainingLines.length === 0) {
+			return pages;
+		}
+
+		return this.nextPage(remainingLines, pages.length, pages);
+	}
 }
 
 module.exports = List;
