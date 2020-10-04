@@ -4,17 +4,13 @@ List (image) generator based on JIMP
 
 ---
 
-**Example [[Code](https://github.com/TrueXPixels/list-image-gen/blob/master/test/index.js)]:**
+A live example can be found in the `#search-engine` channel here: [discord.gg/hypnospace](https://discord.gg/hypnospace)
 
-```js
-npm run test
-```
+**Preview**
 
-Output:
+*Note, the images below are being horizontally merged via another JIMP process, list-image-gen does not do this.*
 
-| Filename     | Image                                                                                     |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| output/1.jpg | ![](https://github.com/TrueXPixels/list-image-gen/blob/master/test/output/1.jpg?raw=true) |
-| output/2.jpg | ![](https://github.com/TrueXPixels/list-image-gen/blob/master/test/output/2.jpg?raw=true) |
-| output/3.jpg | ![](https://github.com/TrueXPixels/list-image-gen/blob/master/test/output/3.jpg?raw=true) |
-| output/4.jpg | ![](https://github.com/TrueXPixels/list-image-gen/blob/master/test/output/4.jpg?raw=true) |
+| Pages | Images |
+| :----: | :---: |
+| 1 & 2 | ![](https://i.imgur.com/pem1VRY.jpg) |
+| 3 & 4 | ![](https://i.imgur.com/uw8hBBB.jpg) |
