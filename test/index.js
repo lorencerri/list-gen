@@ -14,6 +14,17 @@ test('lines parameter empty', t => {
 	t.fail();
 });
 
+test('first background parameter not specified', t => {
+	try {
+		// eslint-disable-next-line no-new
+		new List(['Hello', 'World']);
+	} catch (error) {
+		return t.is(error.message, 'Expected options:firstBG to be a string');
+	}
+
+	t.fail();
+});
+
 // Output: ./output/todolist/#-image.jpg
 test('generate with todo list theme', async t => {
 	const list = new List(
