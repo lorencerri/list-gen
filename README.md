@@ -8,28 +8,28 @@ A simple list (image) generator, using JIMP.
 const lines = ['Item #1', 'Item #2', '...'];
 
 const options = {
+	/* Initial XY Coordinates - Optional, indicates where the first line of text will be placed on the page */
 	initialXY: [
-		/* Optional, indicates where the first line of text will be placed on the page */
 		[50, 100], // Page 1
 		[50, 20] // Page >= 2 (Optional)
 	],
+	/* Line Spacing - Optional, a function which modifies x, y values passed through it */
 	spacing: (x, y) => {
-		/* Optional, a function which modifies x, y values passed through it */
 		return [x, y + 40]; // This example adds 40px to the y value every new line
 	},
-	write:
-		'./output/' /* Optional, when specified, outputs .jpg files in addition to returning buffer(s) */,
+	/* Write Image - Optional, when specified, outputs .jpg files in addition to returning buffer(s) */
+	write: './output/',
+	/* Max Lines - Optional, forces a new page when X amount of lines are on the page */
 	maxLines: [
-		/* Optional, forces a new page when X amount of lines are on the page */
 		25, // Page 1
 		40 // Page >= 2 (Optional)
 	],
-	firstBG:
-		'./bg-1.png' /* Required, the image background displayed on the first (or subsequent) page */,
-	extraBG:
-		'./bg-2.png' /* Optional, the image background displayed on pages 2 and above */,
-	font:
-		'./myFont.fnt' /* Optional, the font to be used, has to be compatible with Jimp */
+	/* First Background - Required, the image background displayed on the first (or subsequent) page */
+	firstBG: './bg-1.png',
+	/* Extra Backgrounds - Optional, the image background displayed on pages 2 and above */
+	extraBG: './bg-2.png',
+	/* Font - Optional, the font to be used, has to be compatible with Jimp */
+	font: './myFont.fnt'
 };
 ```
 
