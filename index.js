@@ -22,8 +22,6 @@ class List {
 			font
 		} = options;
 
-		// Invalid Parameters
-
 		if (!lines) {
 			throw new Error('Expected lines to be an array');
 		}
@@ -128,11 +126,9 @@ class List {
 			bg.write(`${this.write}${index}-image.jpg`);
 		}
 
-		if (remainingLines.length === 0) {
-			return pages;
-		}
-
-		return this.nextPage(remainingLines, pages.length, pages);
+		return remainingLines.length === 0 ?
+			pages :
+			this.nextPage(remainingLines, pages.length, pages);
 	}
 }
 

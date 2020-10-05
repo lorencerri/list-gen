@@ -1,6 +1,6 @@
 {
-	"name": "list-image-gen",
-	"version": "2.0.0",
+	"name": "list-gen",
+	"version": "1.0.1",
 	"description": "List image generated based on JIMP",
 	"main": "index.js",
 	"files": [
@@ -15,16 +15,17 @@
 		"xo": "^0.33.1"
 	},
 	"scripts": {
-		"test": "xo --fix && ava"
+		"test": "xo --fix && ava",
+		"pub": "xo --fix && yarn publish"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/TrueXPixels/list-image-gen.git"
+		"url": "git+https://github.com/TrueXPixels/list-gen.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/TrueXPixels/list-image-gen/issues"
+		"url": "https://github.com/TrueXPixels/list-gen/issues"
 	},
-	"homepage": "https://github.com/TrueXPixels/list-image-gen#readme"
+	"homepage": "https://github.com/TrueXPixels/list-gen#readme"
 }
