@@ -2,8 +2,6 @@
 
 A simple list (image) generator, using JIMP.
 
----
-
 ## Basic Usage
 
 ```js
@@ -34,8 +32,6 @@ const List = require('list-image-gen'); // Require Package
 const list = new List(lines, options); // Create List Object
 const resp = await list.generate(); // Generate list
 ```
-
----
 
 ## Examples
 
