@@ -1,27 +1,30 @@
 {
-    "name": "list-image-gen",
-    "version": "1.0.8",
-    "description": "List image generated based on JIMP",
-    "main": "index.js",
-    "files": [
-        "index.js",
-        "test/resources"
-    ],
-    "dependencies": {
-        "jimp": "^0.16.1"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "node test/index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/TrueXPixels/list-image-gen.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/TrueXPixels/list-image-gen/issues"
-    },
-    "homepage": "https://github.com/TrueXPixels/list-image-gen#readme"
+	"name": "list-image-gen",
+	"version": "2.0.0",
+	"description": "List image generated based on JIMP",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"dependencies": {
+		"jimp": "0.16.1"
+	},
+	"devDependencies": {
+		"ava": "^3.13.0",
+		"tsd": "^0.13.1",
+		"xo": "^0.33.1"
+	},
+	"scripts": {
+		"test": "xo --fix && ava"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TrueXPixels/list-image-gen.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/TrueXPixels/list-image-gen/issues"
+	},
+	"homepage": "https://github.com/TrueXPixels/list-image-gen#readme"
 }
