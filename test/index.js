@@ -55,8 +55,25 @@ test('generate with hypnospace theme', async t => {
 			font: path.join(__dirname, '/resources/hypnospace/hypnoverse.fnt')
 		}
 	);
-
 	t.true(typeof list === 'object');
+
+	const results = await list.generate();
+	t.true(results.every(i => Buffer.isBuffer(i)));
+});
+
+// Output: ./output/staircase/#-image.jpg
+test('generate with staircase theme', async t => {
+	const list = new List(
+		[...new Array(10)].map((_, i) => `User ${i}`),
+		{
+			initialXY: [0, 5],
+			spacing: (x, y) => [x + 100, y + 25],
+			write: path.join(__dirname, '/output/staircase/'),
+			firstBG: path.join(__dirname, '/resources/staircase/background.png')
+		}
+	);
+	t.true(typeof list === 'object');
+
 	const results = await list.generate();
 	t.true(results.every(i => Buffer.isBuffer(i)));
 });
