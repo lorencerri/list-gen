@@ -35,7 +35,7 @@ const resp = await list.generate(); // Generate list
 
 ## Examples
 
-*`yarn test` or `npm run test` to compile these yourself...*
+*Use `yarn test` or `npm run test` to compile these yourself*
 
 **1. Basic todo list** | [Output](https://github.com/lorencerri/list-image-gen/tree/rewrite/test/output/todolist)
 ```js
