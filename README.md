@@ -79,3 +79,16 @@ await list.generate();
 await list.generate();
 ```
 
+**3. Staircase Style** | [Output](https://github.com/lorencerri/list-image-gen/tree/rewrite/test/output/staircase)
+```js
+const list = new List(
+    [...new Array(10)].map((_, i) => `User ${i}`), {
+        initialXY: [0, 5],
+        spacing: (x, y) => [x + 100, y + 25],
+        write: path.join(__dirname, '/output/staircase/'),
+        firstBG: path.join(__dirname, '/resources/staircase/background.png')
+    }
+);
+await list.generate();
+```
+
