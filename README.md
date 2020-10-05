@@ -37,7 +37,7 @@ const resp = await list.generate(); // Generate list
 
 *Use `yarn test` or `npm run test` to compile these yourself*
 
-**1. Basic todo list** | [Output](https://github.com/lorencerri/list-image-gen/tree/rewrite/test/output/todolist)
+**1. Basic todo list** | [Output](https://github.com/lorencerri/list-image-gen/tree/naster/test/output/todolist)
 ```js
 const list = new List(
     [...new Array(22)].map((_, i) => `Item #${i}`), {
@@ -51,7 +51,7 @@ const list = new List(
 await list.generate();
  ```
  
- **2. Pixel Art Theme** | [Output](https://github.com/lorencerri/list-image-gen/tree/rewrite/test/output/hypnospace)
+ **2. Pixel Art Theme** | [Output](https://github.com/lorencerri/list-image-gen/tree/naster/test/output/hypnospace)
  ```js
  const list = new List(
     [...new Array(200)].map((_, i) => `Item #${i}`), {
@@ -79,7 +79,7 @@ await list.generate();
 await list.generate();
 ```
 
-**3. Staircase Style** | [Output](https://github.com/lorencerri/list-image-gen/tree/rewrite/test/output/staircase)
+**3. Staircase Style** | [Output](https://github.com/lorencerri/list-image-gen/tree/naster/test/output/staircase)
 ```js
 const list = new List(
     [...new Array(10)].map((_, i) => `User ${i}`), {
