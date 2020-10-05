@@ -1,4 +1,4 @@
-# list-image-generator
+# list-gen
 
 A simple list (image) generator, using JIMP.
 
