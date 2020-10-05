@@ -4,7 +4,40 @@ A simple list (image) generator, using JIMP.
 
 ---
 
-### Examples
+## Basic Usage
+
+```js
+const lines = ['Item #1', 'Item #2', '...']
+
+const options = {
+    initialXY: [ /* Optional, indicates where the first line of text will be placed on the page */
+        [50, 100], // Page 1
+        [50, 20] // Page >= 2 (Optional)
+    ],
+    spacing: (x, y) => { /* Optional, a function which modifies x, y values passed through it */
+        return [x, y + 40] // This example adds 40px to the y value every new line
+    },
+    write: './output/', /* Optional, when specified, outputs .jpg files in addition to returning buffer(s) */
+    maxLines: [ /* Optional, forces a new page when X amount of lines are on the page */
+        25,  // Page 1
+        40 // Page >= 2 (Optional)
+    ],
+    firstBG: './bg-1.png', /* Required, the image background displayed on the first (or subsequent) page */
+    extraBG: './bg-2.png', /* Optional, the image background displayed on pages 2 and above */
+    font: './myFont.fnt', /* Optional, the font to be used, has to be compatible with Jimp */
+}
+```
+
+```js
+const List = require('list-image-gen'); // Require Package
+
+const list = new List(lines, options); // Create List Object
+const resp = await list.generate(); // Generate list
+```
+
+---
+
+## Examples
 
 *`yarn test` or `npm run test` to compile these yourself...*
 
@@ -49,3 +82,4 @@ await list.generate();
 );
 await list.generate();
 ```
+
