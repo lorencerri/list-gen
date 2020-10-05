@@ -22,8 +22,8 @@ class List {
 			font
 		} = options;
 
-		if (!lines) {
-			throw new Error('Expected lines to be an array');
+		if (!Array.isArray(lines)) {
+			throw new TypeError('Expected lines to be an array');
 		}
 
 		if (initialXY && !Array.isArray(initialXY)) {
@@ -126,9 +126,9 @@ class List {
 			bg.write(`${this.write}${index}-image.jpg`);
 		}
 
-		return remainingLines.length === 0 ?
-			pages :
-			this.nextPage(remainingLines, pages.length, pages);
+		return remainingLines.length === 0
+			? pages
+			: this.nextPage(remainingLines, pages.length, pages);
 	}
 }
 

@@ -32,7 +32,7 @@ test('generate with todo list theme', async t => {
 		{
 			initialXY: [420, 420],
 			spacing: (x, y) => [x, y + 96.3],
-			firstBG: path.join(__dirname, '/resources/todolist/todolist.jpg'),
+			firstBG: path.join(__dirname, '/resources/todolist.jpg'),
 			write: path.join(__dirname, '/output/todolist/'),
 			font: Jimp.FONT_SANS_128_BLACK
 		}
@@ -61,9 +61,9 @@ test('generate with hypnospace theme', async t => {
 			},
 			maxLines: [41, 48],
 			write: path.join(__dirname, '/output/hypnospace/'),
-			firstBG: path.join(__dirname, '/resources/hypnospace/first.png'),
-			extraBG: path.join(__dirname, '/resources/hypnospace/extra.png'),
-			font: path.join(__dirname, '/resources/hypnospace/hypnoverse.fnt')
+			firstBG: path.join(__dirname, '/resources/first.png'),
+			extraBG: path.join(__dirname, '/resources/extra.png'),
+			font: path.join(__dirname, '/resources/hypnoverse.fnt')
 		}
 	);
 	t.true(typeof list === 'object');
@@ -80,11 +80,51 @@ test('generate with staircase theme', async t => {
 			initialXY: [0, 5],
 			spacing: (x, y) => [x + 100, y + 25],
 			write: path.join(__dirname, '/output/staircase/'),
-			firstBG: path.join(__dirname, '/resources/staircase/background.png')
+			firstBG: path.join(__dirname, '/resources/background.png')
 		}
 	);
 	t.true(typeof list === 'object');
 
 	const results = await list.generate();
 	t.true(results.every(i => Buffer.isBuffer(i)));
+});
+
+// Output: ./output/hypnospace-rightalign/#-image.jpg
+test('hypnospace theme plus right align text', async t => {
+	const num = () => String(Math.floor(Math.random() * 9999));
+	const ws = (base, offsets) => {
+		const offset = offsets.reduce(
+			(acc, cur) => acc + (cur.length || cur),
+			0
+		);
+		return ' '.repeat(base - offset > 0 ? base - offset : 0);
+	};
+
+	const lines = [...new Array(100)].map((_, i) => {
+		const n = String(num());
+		const p = `Server ${i}`;
+		return `${p}${ws(53, [n, p])}${n}`;
+	});
+
+	const list = new List(
+		[`Server Name${' '.repeat(30)}Member Count`, ...lines],
+		{
+			initialXY: [
+				[60, 280], // Page 1
+				[60, 10] // Page >= 2
+			],
+			spacing: (x, y, {indexOnPage, pageNumber}) => {
+				y += pageNumber === 0 && indexOnPage % 6 === 0 ? 2 : 0; // Every 6 items on the first page, add 2 to the y position
+				return [x, y + 40];
+			},
+			maxLines: [41, 48],
+			write: path.join(__dirname, '/output/hypnospace-rightalign/'),
+			firstBG: path.join(__dirname, '/resources/first.png'),
+			extraBG: path.join(__dirname, '/resources/extra.png'),
+			font: path.join(__dirname, '/resources/hypnoverse.fnt')
+		}
+	);
+
+	const res = await list.generate();
+	t.true(res.every(i => Buffer.isBuffer(i)));
 });

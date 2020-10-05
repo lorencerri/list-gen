@@ -11,7 +11,8 @@
 	},
 	"scripts": {
 		"test": "xo --fix && ava",
-		"pub": "xo --fix && yarn publish"
+		"pub": "xo --fix && yarn publish",
+		"ava": "ava"
 	},
 	"files": [
 		"index.js"
