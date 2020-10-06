@@ -1,6 +1,6 @@
 {
 	"name": "list-gen",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "List image generated based on JIMP",
 	"license": "MIT",
 	"repository": "lorencerri/list-gen",
