@@ -44,21 +44,7 @@ const resp = await list.generate(); // Generate list
 
 _Use `yarn test` or `npm run test` to compile these yourself_
 
-<details>
-<summary>
-	
-	**1. Basic todo list**
-</summary>
-	
-<details>
-	<summary>
-		Output
-	</summary>
-	
-	| Filename | Image |
-	| :---: | :---: |
-	| 0-image.jpg | ![](https://github.com/lorencerri/list-gen/blob/master/test/output/todolist/0-image.jpg) |
-</details>
+**1. Basic todo list** | [Output](https://github.com/lorencerri/list-image-gen/tree/master/test/output/todolist)
 
 ```js
 const list = new List(
@@ -73,7 +59,6 @@ const list = new List(
 );
 await list.generate();
 ```
-</details>
 
 **2. Pixel Art Theme** | [Output](https://github.com/lorencerri/list-image-gen/tree/master/test/output/pixelart)
 
