@@ -78,7 +78,7 @@ const list = new List(
 			return [x, y + 40];
 		},
 		maxLines: [41, 48],
-		write: path.join(__dirname, '/output/hypnospace/'),
+		write: path.join(__dirname, '/output/pixelart/'),
 		firstBG: path.join(__dirname, '/resources/first.png'),
 		extraBG: path.join(__dirname, '/resources/extra.png'),
 		font: path.join(__dirname, '/resources/hypnoverse.fnt')
