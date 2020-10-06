@@ -52,7 +52,7 @@ const list = new List(
 	{
 		initialXY: [420, 420],
 		spacing: (x, y) => [x, y + 96.3],
-		firstBG: path.join(__dirname, '/resources/todolist/todolist.jpg'),
+		firstBG: path.join(__dirname, '/resources/todolist.jpg'),
 		write: path.join(__dirname, '/output/todolist/'),
 		font: Jimp.FONT_SANS_128_BLACK
 	}
@@ -79,9 +79,9 @@ const list = new List(
 		},
 		maxLines: [41, 48],
 		write: path.join(__dirname, '/output/hypnospace/'),
-		firstBG: path.join(__dirname, '/resources/hypnospace/first.png'),
-		extraBG: path.join(__dirname, '/resources/hypnospace/extra.png'),
-		font: path.join(__dirname, '/resources/hypnospace/hypnoverse.fnt')
+		firstBG: path.join(__dirname, '/resources/first.png'),
+		extraBG: path.join(__dirname, '/resources/extra.png'),
+		font: path.join(__dirname, '/resources/hypnoverse.fnt')
 	}
 );
 await list.generate();
@@ -96,7 +96,7 @@ const list = new List(
 		initialXY: [0, 5],
 		spacing: (x, y) => [x + 100, y + 25],
 		write: path.join(__dirname, '/output/staircase/'),
-		firstBG: path.join(__dirname, '/resources/staircase/background.png')
+		firstBG: path.join(__dirname, '/resources/background.png')
 	}
 );
 await list.generate();
