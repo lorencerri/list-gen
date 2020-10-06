@@ -1,6 +1,6 @@
 # list-gen
 
-A simple list (image) generator, using JIMP.
+A simple helper package for generating lists in JIMP.
 
 ## Basic Usage
 
