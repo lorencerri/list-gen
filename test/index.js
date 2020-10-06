@@ -91,7 +91,7 @@ test('generate with staircase theme', async t => {
 
 // Output: ./output/hypnospace-rightalign/#-image.jpg
 test('hypnospace theme plus right align text', async t => {
-	const num = () => String(Math.floor(Math.random() * 9999));
+	const number = () => String(Math.floor(Math.random() * 9999));
 	const ws = (base, offsets) => {
 		const offset = offsets.reduce(
 			(acc, cur) => acc + (cur.length || cur),
@@ -101,7 +101,7 @@ test('hypnospace theme plus right align text', async t => {
 	};
 
 	const lines = [...new Array(100)].map((_, i) => {
-		const n = String(num());
+		const n = String(number());
 		const p = `Server ${i}`;
 		return `${p}${ws(53, [n, p])}${n}`;
 	});

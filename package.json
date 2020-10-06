@@ -10,9 +10,8 @@
 		"url": "https://lorencerri.github.io"
 	},
 	"scripts": {
-		"test": "xo --fix && ava",
-		"pub": "xo --fix && yarn publish",
-		"ava": "ava"
+		"test": "ava",
+		"pub": "yarn publish"
 	},
 	"files": [
 		"index.js"
