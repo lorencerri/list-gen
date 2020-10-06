@@ -44,8 +44,8 @@ test('generate with todo list theme', async t => {
 	t.true(results.every(i => Buffer.isBuffer(i)));
 });
 
-// Output: ./output/hypnospace/#-image.jpg
-test('generate with hypnospace theme', async t => {
+// Output: ./output/pixelart/#-image.jpg
+test('generate with pixel art theme', async t => {
 	const list = new List(
 		[...new Array(200)].map((_, i) => `Item #${i}`),
 		{
@@ -61,7 +61,7 @@ test('generate with hypnospace theme', async t => {
 				return [x, y + 40];
 			},
 			maxLines: [41, 48],
-			write: path.join(__dirname, '/output/hypnospace/'),
+			write: path.join(__dirname, '/output/pixelart/'),
 			firstBG: path.join(__dirname, '/resources/first.png'),
 			extraBG: path.join(__dirname, '/resources/extra.png'),
 			font: path.join(__dirname, '/resources/hypnoverse.fnt'),
@@ -90,8 +90,8 @@ test('generate with staircase theme', async t => {
 	t.true(results.every(i => Buffer.isBuffer(i)));
 });
 
-// Output: ./output/hypnospace-rightalign/#-image.jpg
-test('hypnospace theme plus right align text', async t => {
+// Output: ./output/pixelart-rightalign/#-image.jpg
+test('pixelart theme plus right align text', async t => {
 	const number = () => String(Math.floor(Math.random() * 9999));
 	const ws = (base, offsets) => {
 		const offset = offsets.reduce(
@@ -119,7 +119,7 @@ test('hypnospace theme plus right align text', async t => {
 				return [x, y + 40];
 			},
 			maxLines: [41, 48],
-			write: path.join(__dirname, '/output/hypnospace-rightalign/'),
+			write: path.join(__dirname, '/output/pixelart-rightalign/'),
 			firstBG: path.join(__dirname, '/resources/first.png'),
 			extraBG: path.join(__dirname, '/resources/extra.png'),
 			font: path.join(__dirname, '/resources/hypnoverse.fnt'),

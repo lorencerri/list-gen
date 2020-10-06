@@ -60,7 +60,7 @@ const list = new List(
 await list.generate();
 ```
 
-**2. Pixel Art Theme** | [Output](https://github.com/lorencerri/list-image-gen/tree/master/test/output/hypnospace)
+**2. Pixel Art Theme** | [Output](https://github.com/lorencerri/list-image-gen/tree/master/test/output/pixelart)
 
 ```js
 const list = new List(
