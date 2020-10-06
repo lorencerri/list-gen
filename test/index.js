@@ -1,7 +1,8 @@
+/* eslint-disable no-param-reassign */
 const test = require('ava');
 const path = require('path');
-const List = require('..');
 const Jimp = require('jimp');
+const List = require('..');
 
 test('lines parameter empty', t => {
 	try {
@@ -34,7 +35,7 @@ test('generate with todo list theme', async t => {
 			spacing: (x, y) => [x, y + 96.3],
 			firstBG: path.join(__dirname, '/resources/todolist.jpg'),
 			write: path.join(__dirname, '/output/todolist/'),
-			font: Jimp.FONT_SANS_128_BLACK
+			font: Jimp.FONT_SANS_128_BLACK,
 		}
 	);
 
@@ -50,7 +51,7 @@ test('generate with hypnospace theme', async t => {
 		{
 			initialXY: [
 				[60, 280], // Page 1
-				[60, 10] // Page >= 2
+				[60, 10], // Page >= 2
 			],
 			spacing: (x, y, {remainingLines, pageNumber}) => {
 				if (pageNumber === 0) {
@@ -63,7 +64,7 @@ test('generate with hypnospace theme', async t => {
 			write: path.join(__dirname, '/output/hypnospace/'),
 			firstBG: path.join(__dirname, '/resources/first.png'),
 			extraBG: path.join(__dirname, '/resources/extra.png'),
-			font: path.join(__dirname, '/resources/hypnoverse.fnt')
+			font: path.join(__dirname, '/resources/hypnoverse.fnt'),
 		}
 	);
 	t.true(typeof list === 'object');
@@ -80,7 +81,7 @@ test('generate with staircase theme', async t => {
 			initialXY: [0, 5],
 			spacing: (x, y) => [x + 100, y + 25],
 			write: path.join(__dirname, '/output/staircase/'),
-			firstBG: path.join(__dirname, '/resources/background.png')
+			firstBG: path.join(__dirname, '/resources/background.png'),
 		}
 	);
 	t.true(typeof list === 'object');
@@ -111,7 +112,7 @@ test('hypnospace theme plus right align text', async t => {
 		{
 			initialXY: [
 				[60, 280], // Page 1
-				[60, 10] // Page >= 2
+				[60, 10], // Page >= 2
 			],
 			spacing: (x, y, {indexOnPage, pageNumber}) => {
 				y += pageNumber === 0 && indexOnPage % 6 === 0 ? 2 : 0; // Every 6 items on the first page, add 2 to the y position
@@ -121,7 +122,7 @@ test('hypnospace theme plus right align text', async t => {
 			write: path.join(__dirname, '/output/hypnospace-rightalign/'),
 			firstBG: path.join(__dirname, '/resources/first.png'),
 			extraBG: path.join(__dirname, '/resources/extra.png'),
-			font: path.join(__dirname, '/resources/hypnoverse.fnt')
+			font: path.join(__dirname, '/resources/hypnoverse.fnt'),
 		}
 	);
 
